@@ -1,0 +1,122 @@
+libhdate
+-------------------------------------------
+LibHdate is a small C,C++ library for Hebrew calendar and dates, 
+holidays, and reading sequence (parasha).
+
+Runtime requirements:
+  cygwin-1.5.19-4
+  libintl3-0.14.5-1
+
+Build requirements:
+(besides corresponding -devel packages)
+  cygwin-1.5.19-4
+  autoconf2.5-2.59-3
+  automake1.9-1.9.6-1
+  binutils-20050610-1
+  cygport-0.1.93-1
+  gawk-3.1.5-2
+  gcc-core-3.4.4-1
+  libtool1.5-1.5.22-1
+  make-3.80-1
+  sed-4.1.4-1
+
+Canonical homepage:
+  http://libhdate.sourceforge.net/
+
+Canonical download:
+  http://prdownloads.sourceforge.net/libhdate/
+
+-------------------------------------------
+
+Build instructions:
+  unpack libhdate-1.4.6-X-src.tar.bz2
+    if you use setup to install this src package, it will be
+	 unpacked under /usr/src automatically
+  cd /usr/src
+  cygport ./libhdate-1.4.6-X.cygport all
+
+This will create:
+  /usr/src/libhdate-1.4.6-X-src.tar.bz2
+  /usr/src/libhdate-1.4.6-X.tar.bz2
+  /usr/src/libhdate1-1.4.6-X.tar.bz2
+
+-------------------------------------------
+
+Files included in the binary package:
+
+  /usr/bin/hcal.exe
+  /usr/bin/hdate.exe
+  /usr/bin/hdate_hebcal.exe
+  /usr/bin/hdate_holydays_html.exe
+  /usr/bin/hdate_holydays_ical.exe
+  /usr/bin/hdate_reading_html.exe
+  /usr/bin/hdate_reading_ical.exe
+  /usr/share/doc/Cygwin/libhdate-1.4.6.README
+  /usr/share/doc/libhdate-1.4.6/ABOUT-NLS
+  /usr/share/doc/libhdate-1.4.6/AUTHORS
+  /usr/share/doc/libhdate-1.4.6/COPYING
+  /usr/share/doc/libhdate-1.4.6/ChangeLog
+  /usr/share/doc/libhdate-1.4.6/INSTALL
+  /usr/share/doc/libhdate-1.4.6/NEWS
+  /usr/share/doc/libhdate-1.4.6/README
+  /usr/share/doc/libhdate-1.4.6/TODO
+  /usr/share/doc/libhdate-1.4.6/USE
+  /usr/share/doc/libhdate-1.4.6/examples/hcal/hcal.c
+  /usr/share/doc/libhdate-1.4.6/examples/hcal/hdate.c
+  /usr/share/doc/libhdate-1.4.6/examples/html/hdate_holydays_html.c
+  /usr/share/doc/libhdate-1.4.6/examples/html/hdate_reading_html.c
+  /usr/share/doc/libhdate-1.4.6/examples/ical/hdate_holydays_ical.c
+  /usr/share/doc/libhdate-1.4.6/examples/ical/hdate_reading_ical.c
+  /usr/share/doc/libhdate-1.4.6/hdate_README
+  /usr/share/locale/es_MX/LC_MESSAGES/libhdate.mo
+  /usr/share/locale/fr/LC_MESSAGES/libhdate.mo
+  /usr/share/locale/he/LC_MESSAGES/libhdate.mo
+  /usr/share/locale/ru/LC_MESSAGES/libhdate.mo
+  /usr/share/locale/sv/LC_MESSAGES/libhdate.mo
+  /usr/share/man/man1/hcal.1.gz
+  /usr/share/man/man1/hdate.1.gz
+  /usr/share/man/man3/hdate.h.3.gz
+  /usr/share/man/man3/hdate_struct.3.gz
+
+Files included in the libhdate1 package:
+
+  /usr/bin/cyghdate-1.dll
+
+Files included in the devel package:
+
+  /usr/include/hdate.h
+  /usr/include/hdatepp.h
+  /usr/lib/libhdate.a
+  /usr/lib/libhdate.dll.a
+  /usr/lib/libhdate.la
+  /usr/lib/pkgconfig/libhdate.pc
+
+------------------
+
+Port Notes:
+
+----- version 1.4.6-1 -----
+Version bump.
+Created separate devel package.
+
+----- version 1.4.2-1 -----
+Version bump.
+
+----- version 1.4.1-1 -----
+Version bump.
+
+----- version 1.3.0-1 -----
+Version and ABI bump.
+
+----- version 1.1.1-1 -----
+Version bump.
+
+----- version 0.22.0-1 -----
+Version bump.
+
+----- version 0.10.1-1 -----
+Initial release for Cygwin.
+
+
+Cygwin port maintained by:
+http://cygwinports.dotsrc.org/

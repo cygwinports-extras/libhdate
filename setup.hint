@@ -1,0 +1,5 @@
+category: Judaism
+requires: cygwin libhdate1
+sdesc: "Hebrew calendar library (applications and docs)"
+ldesc: "LibHdate is a small C,C++ library for Hebrew calendar and 
+dates, holidays, and reading sequence (parasha)."
