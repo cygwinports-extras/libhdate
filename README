@@ -8,8 +8,12 @@ Runtime requirements:
   libintl8-0.15-1
 (perl-hdate)
   perl-5.8.8-4
+(php-hdate)
+  php-5.2.5-1
 (python-hdate)
   python-2.5.1-3
+(ruby-hdate)
+  ruby-1.8.6-1
 
 Build requirements:
 (besides corresponding -devel packages)
@@ -33,19 +37,21 @@ Canonical download:
 -------------------------------------------
 
 Build instructions:
-  unpack libhdate-1.4.10-X-src.tar.bz2
+  unpack libhdate-1.4.11-X-src.tar.bz2
     if you use setup to install this src package, it will be
 	 unpacked under /usr/src automatically
   cd /usr/src
-  cygport ./libhdate-1.4.10-X.cygport all
+  cygport ./libhdate-1.4.11-X.cygport all
 
 This will create:
-  /usr/src/libhdate-1.4.10-X-src.tar.bz2
-  /usr/src/libhdate-1.4.10-X.tar.bz2
-  /usr/src/libhdate-devel-1.4.10-X.tar.bz2
-  /usr/src/libhdate1-1.4.10-X.tar.bz2
-  /usr/src/perl-hdate-1.4.10-X.tar.bz2
-  /usr/src/python-hdate-1.4.10-X.tar.bz2
+  /usr/src/libhdate-1.4.11-X-src.tar.bz2
+  /usr/src/libhdate-1.4.11-X.tar.bz2
+  /usr/src/libhdate-devel-1.4.11-X.tar.bz2
+  /usr/src/libhdate1-1.4.11-X.tar.bz2
+  /usr/src/perl-hdate-1.4.11-X.tar.bz2
+  /usr/src/php-hdate-1.4.11-X.tar.bz2
+  /usr/src/python-hdate-1.4.11-X.tar.bz2
+  /usr/src/ruby-hdate-1.4.11-X.tar.bz2
 
 -------------------------------------------
 
@@ -54,20 +60,21 @@ Files included in the binary packages:
 (libhdate)
   /usr/bin/hcal.exe
   /usr/bin/hdate.exe
-  /usr/share/doc/libhdate-1.4.10/ABOUT-NLS
-  /usr/share/doc/libhdate-1.4.10/AUTHORS
-  /usr/share/doc/libhdate-1.4.10/COPYING
-  /usr/share/doc/libhdate-1.4.10/ChangeLog
-  /usr/share/doc/libhdate-1.4.10/INSTALL
-  /usr/share/doc/libhdate-1.4.10/NEWS
-  /usr/share/doc/libhdate-1.4.10/README
-  /usr/share/doc/libhdate-1.4.10/USE
-  /usr/share/doc/libhdate-1.4.10/examples/bindings/hdate_cpp.cpp
-  /usr/share/doc/libhdate-1.4.10/examples/bindings/hdate_pascal.pp
-  /usr/share/doc/libhdate-1.4.10/examples/bindings/hdate_perl.pl
-  /usr/share/doc/libhdate-1.4.10/examples/bindings/hdate_python.py
-  /usr/share/doc/libhdate-1.4.10/examples/hcal/hcal.c
-  /usr/share/doc/libhdate-1.4.10/examples/hcal/hdate.c
+  /usr/share/doc/libhdate-1.4.11/ABOUT-NLS
+  /usr/share/doc/libhdate-1.4.11/AUTHORS
+  /usr/share/doc/libhdate-1.4.11/COPYING
+  /usr/share/doc/libhdate-1.4.11/ChangeLog
+  /usr/share/doc/libhdate-1.4.11/INSTALL
+  /usr/share/doc/libhdate-1.4.11/NEWS
+  /usr/share/doc/libhdate-1.4.11/README
+  /usr/share/doc/libhdate-1.4.11/USE
+  /usr/share/doc/libhdate-1.4.11/examples/bindings/hdate_cpp.cpp
+  /usr/share/doc/libhdate-1.4.11/examples/bindings/hdate_perl.pl
+  /usr/share/doc/libhdate-1.4.11/examples/bindings/hdate_php.php
+  /usr/share/doc/libhdate-1.4.11/examples/bindings/hdate_python.py
+  /usr/share/doc/libhdate-1.4.11/examples/bindings/hdate_ruby.rb
+  /usr/share/doc/libhdate-1.4.11/examples/hcal/hcal.c
+  /usr/share/doc/libhdate-1.4.11/examples/hcal/hdate.c
   /usr/share/locale/es_MX/LC_MESSAGES/libhdate.mo
   /usr/share/locale/fr/LC_MESSAGES/libhdate.mo
   /usr/share/locale/he/LC_MESSAGES/libhdate.mo
@@ -97,6 +104,11 @@ Files included in the binary packages:
   /usr/lib/perl5/vendor_perl/5.8/cygwin/hdate.la
   /usr/lib/perl5/vendor_perl/5.8/cygwin/hdate.pm
 
+(php-hdate)
+  /etc/php5/conf.d/libhdate.ini
+  /usr/lib/php/20060613/hdate.dll
+  /usr/lib/php/20060613/hdate.la
+
 (python-hdate)
   /usr/lib/python2.5/site-packages/_hdate.dll
   /usr/lib/python2.5/site-packages/_hdate.la
@@ -104,9 +116,16 @@ Files included in the binary packages:
   /usr/lib/python2.5/site-packages/hdate.pyc
   /usr/lib/python2.5/site-packages/hdate.pyo
 
+(ruby-hdate)
+  /usr/lib/ruby/site_ruby/1.8/i386-cygwin/hdate.la
+  /usr/lib/ruby/site_ruby/1.8/i386-cygwin/hdate.so
+
 ------------------
 
 Port Notes:
+
+----- version 1.4.11-1 -----
+Version bump, added PHP and Ruby bindings.
 
 ----- version 1.4.10-1 -----
 Version bump.
