@@ -1,0 +1,370 @@
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4~' -x aclocal.m4t -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x '*config.h.in' -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x aclocal.m4 -x Makefile.in -x makefile.in -x configure -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x intl -x m4 -x 'hdate_wrap.c*' origsrc/libhdate-1.4.12/Makefile.am src/libhdate-1.4.12/Makefile.am
+--- origsrc/libhdate-1.4.12/Makefile.am	2008-06-14 02:59:23.000000000 -0500
++++ src/libhdate-1.4.12/Makefile.am	2008-06-15 16:14:28.843750000 -0500
+@@ -5,7 +5,7 @@
+ pkgconfigdir = $(libdir)/pkgconfig
+ pkgconfig_DATA = libhdate.pc
+ 
+-libhdatedocdir = ${prefix}/share/doc/libhdate
++libhdatedocdir = ${prefix}/share/doc/libhdate-$(VERSION)
+ libhdatedoc_DATA = \
+ 	README\
+ 	COPYING\
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4~' -x aclocal.m4t -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x '*config.h.in' -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x aclocal.m4 -x Makefile.in -x makefile.in -x configure -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x intl -x m4 -x 'hdate_wrap.c*' origsrc/libhdate-1.4.12/bindings/pascal/Makefile.am src/libhdate-1.4.12/bindings/pascal/Makefile.am
+--- origsrc/libhdate-1.4.12/bindings/pascal/Makefile.am	2008-06-15 02:41:47.000000000 -0500
++++ src/libhdate-1.4.12/bindings/pascal/Makefile.am	2008-06-15 16:19:52.828125000 -0500
+@@ -10,13 +10,13 @@
+ all-am: hdate.o hdate_dyn_pascal.o hdate.gpi
+ 
+ hdate.o: hdate.pp
+-	fpc hdate.pp
++	fpc $<
+ 
+ hdate_dyn_pascal.o: hdate_dyn_pascal.pp hdate.o
+-	fpc hdate_dyn_pascal.pp
++	fpc $<
+ 
+ hdate.gpi: hdate.pp
+-	gpc --interface-only hdate.pp
++	gpc --interface-only $<
+ 
+ install-data-local:hdate_dyn_pascal.o hdate.o
+ 	$(mkinstalldirs) $(DESTDIR)$(PA_MODULES_PATH)/hdate
+@@ -24,11 +24,11 @@
+ 	$(INSTALL_DATA) hdate_dyn_pascal.o $(DESTDIR)$(PA_MODULES_PATH)/hdate/hdate_dyn_pascal.o
+ 	$(INSTALL_DATA) hdate.ppu $(DESTDIR)$(PA_MODULES_PATH)/hdate/hdate.ppu
+ 	$(INSTALL_DATA) hdate_dyn_pascal.ppu $(DESTDIR)$(PA_MODULES_PATH)/hdate/hdate_dyn_pascal.ppu
+-	$(INSTALL_DATA) fpc_README $(DESTDIR)$(PA_MODULES_PATH)/hdate/fpc_README
+-	$(INSTALL_DATA) Package.fpc $(DESTDIR)$(PA_MODULES_PATH)/hdate/Package.fpc
++	$(INSTALL_DATA) $(srcdir)/fpc_README $(DESTDIR)$(PA_MODULES_PATH)/hdate/fpc_README
++	$(INSTALL_DATA) $(srcdir)/Package.fpc $(DESTDIR)$(PA_MODULES_PATH)/hdate/Package.fpc
+ 	$(mkinstalldirs) $(DESTDIR)$(GP_MODULES_PATH)units
+ 	$(INSTALL_DATA) hdate.gpi $(DESTDIR)$(GP_MODULES_PATH)units/hdate.gpi
+-	$(INSTALL_DATA) hdate.pp $(DESTDIR)$(GP_MODULES_PATH)units/hdate.pas
++	$(INSTALL_DATA) $(srcdir)/hdate.pp $(DESTDIR)$(GP_MODULES_PATH)units/hdate.pas
+ 
+ endif
+ 
+@@ -41,10 +41,10 @@
+ all-am: hdate.o hdate_dyn_pascal.o
+ 
+ hdate.o: hdate.pp
+-	fpc hdate.pp
++	fpc $<
+ 
+ hdate_dyn_pascal.o: hdate_dyn_pascal.pp hdate.o
+-	fpc hdate_dyn_pascal.pp
++	fpc $<
+ 
+ install-data-local:hdate_dyn_pascal.o hdate.o
+ 	$(mkinstalldirs) $(DESTDIR)$(PA_MODULES_PATH)/hdate
+@@ -52,8 +52,8 @@
+ 	$(INSTALL_DATA) hdate_dyn_pascal.o $(DESTDIR)$(PA_MODULES_PATH)/hdate/hdate_dyn_pascal.o
+ 	$(INSTALL_DATA) hdate.ppu $(DESTDIR)$(PA_MODULES_PATH)/hdate/hdate.ppu
+ 	$(INSTALL_DATA) hdate_dyn_pascal.ppu $(DESTDIR)$(PA_MODULES_PATH)/hdate/hdate_dyn_pascal.ppu
+-	$(INSTALL_DATA) fpc_README $(DESTDIR)$(PA_MODULES_PATH)/hdate/fpc_README
+-	$(INSTALL_DATA) Package.fpc $(DESTDIR)$(PA_MODULES_PATH)/hdate/Package.fpc
++	$(INSTALL_DATA) $(srcdir)/fpc_README $(DESTDIR)$(PA_MODULES_PATH)/hdate/fpc_README
++	$(INSTALL_DATA) $(srcdir)/Package.fpc $(DESTDIR)$(PA_MODULES_PATH)/hdate/Package.fpc
+ 
+ endif
+ 
+@@ -66,11 +66,11 @@
+ all-am: hdate.gpi
+ 
+ hdate.gpi: hdate.pp
+-	gpc --interface-only hdate.pp
++	gpc --interface-only $<
+ 
+ install-data-local:hdate.gpi
+ 	$(mkinstalldirs) $(DESTDIR)$(GP_MODULES_PATH)units
+ 	$(INSTALL_DATA) hdate.gpi $(DESTDIR)$(GP_MODULES_PATH)units/hdate.gpi
+-	$(INSTALL_DATA) hdate.pp $(DESTDIR)$(GP_MODULES_PATH)units/hdate.pas
++	$(INSTALL_DATA) $(srcdir)/hdate.pp $(DESTDIR)$(GP_MODULES_PATH)units/hdate.pas
+   
+ endif
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4~' -x aclocal.m4t -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x '*config.h.in' -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x aclocal.m4 -x Makefile.in -x makefile.in -x configure -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x intl -x m4 -x 'hdate_wrap.c*' origsrc/libhdate-1.4.12/bindings/pascal/hdate.pp src/libhdate-1.4.12/bindings/pascal/hdate.pp
+--- origsrc/libhdate-1.4.12/bindings/pascal/hdate.pp	2008-06-14 07:15:25.000000000 -0500
++++ src/libhdate-1.4.12/bindings/pascal/hdate.pp	2008-06-15 16:48:24.000000000 -0500
+@@ -42,7 +42,11 @@
+ 
+ const
+   // the global name of the hdate library: <b>DEPERCATED</b>
++  {$IFDEF __CYGWIN__}
++  LIBHDATE_LIBRARY_NAME = 'cyghdate-1.dll';
++  {$ELSE}
+   LIBHDATE_LIBRARY_NAME = 'hdate';
++  {$ENDIF}
+ 
+ {$IFDEF __GPC__}
+ type
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4~' -x aclocal.m4t -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x '*config.h.in' -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x aclocal.m4 -x Makefile.in -x makefile.in -x configure -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x intl -x m4 -x 'hdate_wrap.c*' origsrc/libhdate-1.4.12/bindings/pascal/hdate_dyn_pascal.pp src/libhdate-1.4.12/bindings/pascal/hdate_dyn_pascal.pp
+--- origsrc/libhdate-1.4.12/bindings/pascal/hdate_dyn_pascal.pp	2008-06-14 07:32:17.000000000 -0500
++++ src/libhdate-1.4.12/bindings/pascal/hdate_dyn_pascal.pp	2008-06-15 16:43:23.390625000 -0500
+@@ -71,11 +71,15 @@
+   {$IFDEF UNIX}
+   LIBHDATE_LIBRARY_NAME = 'libhdate.so';
+   {$ELSE}
++    {$IFDEF __CYGWIN__}
++       LIBHDATE_LIBRARY_NAME = 'cyghdate-1.dll';
++    {$ELSE}
+     {$IFDEF MSWINODWS}
+        LIBHDATE_LIBRARY_NAME = 'hdate.dll';
+     {$ELSE}
+       {$FATAL Unsupported environment}
+     {$ENDIF}
++    {$ENDIF}
+   {$ENDIF}
+ 
+ (** @def HDATE_DIASPORA_FLAG
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4~' -x aclocal.m4t -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x '*config.h.in' -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x aclocal.m4 -x Makefile.in -x makefile.in -x configure -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x intl -x m4 -x 'hdate_wrap.c*' origsrc/libhdate-1.4.12/bindings/perl/Makefile.am src/libhdate-1.4.12/bindings/perl/Makefile.am
+--- origsrc/libhdate-1.4.12/bindings/perl/Makefile.am	2008-06-14 02:59:22.000000000 -0500
++++ src/libhdate-1.4.12/bindings/perl/Makefile.am	2008-06-15 16:14:28.859375000 -0500
+@@ -3,23 +3,19 @@
+ 
+ if WITH_PERL
+ 
+-DEPS= $(top_builddir)/src/libhdate.la
++perldir = $(PE_MODULES_PATH)
++perl_DATA = hdate.pm
+ 
+-CLEANFILES = *.o *.cxx *.so *wrap* *.pm
++BUILT_SOURCES = hdate_wrap.cxx hdate.pm
+ 
+-all-am: hdate.so
+-	
++perl_LTLIBRARIES = hdate.la
+ 
+-hdate.so: hdate_wrap.cxx
+-	g++ -fpic -c hdate_wrap.cxx $(PE_CFLAGS) -I$(top_srcdir)/src
+-	g++ -shared ../../src/.libs/libhdate.so hdate_wrap.o -o hdate.so
++hdate_la_SOURCES = hdate_wrap.cxx
++hdate_la_CXXFLAGS = -I$(top_srcdir)/src $(PE_CFLAGS)
++hdate_la_LDFLAGS = -module -avoid-version -no-undefined
++hdate_la_LIBADD = $(top_builddir)/src/libhdate.la $(PE_LIBS)
+ 
+-hdate_wrap.cxx: hdate.i
+-	swig -perl -c++ hdate.i
+-
+-install-data-local: hdate.so
+-	$(mkinstalldirs) $(DESTDIR)$(PE_MODULES_PATH)/auto/hdate/
+-	$(INSTALL_DATA) hdate.so $(DESTDIR)$(PE_MODULES_PATH)/auto/hdate/hdate.so
+-	$(INSTALL_DATA) hdate.pm $(DESTDIR)$(PE_MODULES_PATH)/hdate.pm
++hdate_wrap.cxx hdate.pm: hdate.i
++	swig -perl -c++ -outdir . $<
+ 
+ endif
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4~' -x aclocal.m4t -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x '*config.h.in' -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x aclocal.m4 -x Makefile.in -x makefile.in -x configure -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x intl -x m4 -x 'hdate_wrap.c*' origsrc/libhdate-1.4.12/bindings/php/Makefile.am src/libhdate-1.4.12/bindings/php/Makefile.am
+--- origsrc/libhdate-1.4.12/bindings/php/Makefile.am	2008-06-14 02:59:23.000000000 -0500
++++ src/libhdate-1.4.12/bindings/php/Makefile.am	2008-06-15 16:14:28.890625000 -0500
+@@ -1,26 +1,21 @@
+-
+-EXTRA_DIST = hdate.i hdate.ini
++EXTRA_DIST = hdate.i
+ 
+ if WITH_PHP
+ 
+-DEPS= $(top_builddir)/src/libhdate.la
++phpconfigdir = $(PH_CONFIG_PATH)
++phpconfig_DATA = hdate.ini
+ 
+-CLEANFILES = *.o *.cpp *.h *.so *wrap*
++BUILT_SOURCES = hdate_wrap.cpp
+ 
+-all-am: hdate.so
+-	
++phpmoddir = $(PH_MODULES_PATH)
++phpmod_LTLIBRARIES = hdate.la
+ 
+-hdate.so: hdate_wrap.cpp
+-	g++ -I$(top_srcdir)/src `php-config --includes` -fpic -c hdate_wrap.cpp
+-	gcc -shared ../../src/.libs/libhdate.so hdate_wrap.o -lstdc++ -o hdate.so
++hdate_la_SOURCES = hdate_wrap.cpp
++hdate_la_CPPFLAGS = -I$(top_srcdir)/src `php-config --includes`
++hdate_la_LDFLAGS = -module -avoid-version -no-undefined
++hdate_la_LIBADD = $(top_builddir)/src/libhdate.la -lphp5lib
+ 
+ hdate_wrap.cpp: hdate.i
+-	swig -php5 -c++ hdate.i
++	swig -php5 -c++ -outdir . $<
+ 
+-install-data-local: hdate.so hdate.ini
+-	$(mkinstalldirs) $(DESTDIR)$(PH_MODULES_PATH)
+-	$(INSTALL_DATA) hdate.so $(DESTDIR)$(PH_MODULES_PATH)/hdate.so
+-	
+-	$(mkinstalldirs) $(DESTDIR)$(PH_CONFIG_PATH)
+-	$(INSTALL_DATA) hdate.ini $(DESTDIR)$(PH_CONFIG_PATH)/hdate.ini
+ endif
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4~' -x aclocal.m4t -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x '*config.h.in' -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x aclocal.m4 -x Makefile.in -x makefile.in -x configure -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x intl -x m4 -x 'hdate_wrap.c*' origsrc/libhdate-1.4.12/bindings/python/Makefile.am src/libhdate-1.4.12/bindings/python/Makefile.am
+--- origsrc/libhdate-1.4.12/bindings/python/Makefile.am	2008-06-14 02:59:22.000000000 -0500
++++ src/libhdate-1.4.12/bindings/python/Makefile.am	2008-06-15 16:14:28.937500000 -0500
+@@ -3,23 +3,19 @@
+ 
+ if WITH_PYTHON
+ 
+-DEPS= $(top_builddir)/src/libhdate.la
++pythondir = $(PY_MODULES_PATH)
++python_DATA = hdate.py
+ 
+-CLEANFILES = *.o *.cxx *.so *wrap* *.py
++BUILT_SOURCES = hdate_wrap.cxx hdate.py
+ 
+-all-am: _hdate.so
+-	
++python_LTLIBRARIES = _hdate.la
+ 
+-_hdate.so: hdate_wrap.cxx
+-	g++ -fpic -c hdate_wrap.cxx $(PY_CFLAGS) -I$(top_srcdir)/src
+-	g++ -shared ../../src/.libs/libhdate.so hdate_wrap.o -o _hdate.so
++_hdate_la_SOURCES = hdate_wrap.cxx
++_hdate_la_CXXFLAGS = -I$(top_srcdir)/src $(PY_CFLAGS)
++_hdate_la_LDFLAGS = -module -avoid-version -no-undefined
++_hdate_la_LIBADD = $(top_builddir)/src/libhdate.la $(PY_LIBS)
+ 
+-hdate_wrap.cxx: hdate.i
+-	swig -python -c++ hdate.i
+-
+-install-data-local: _hdate.so
+-	$(mkinstalldirs) $(DESTDIR)$(PY_MODULES_PATH)
+-	$(INSTALL_DATA) _hdate.so $(DESTDIR)$(PY_MODULES_PATH)/_hdate.so
+-	$(INSTALL_DATA) hdate.py $(DESTDIR)$(PY_MODULES_PATH)/hdate.py
++hdate_wrap.cxx hdate.py: hdate.i
++	swig -python -c++ -outdir . $<
+ 
+ endif
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4~' -x aclocal.m4t -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x '*config.h.in' -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x aclocal.m4 -x Makefile.in -x makefile.in -x configure -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x intl -x m4 -x 'hdate_wrap.c*' origsrc/libhdate-1.4.12/bindings/ruby/Makefile.am src/libhdate-1.4.12/bindings/ruby/Makefile.am
+--- origsrc/libhdate-1.4.12/bindings/ruby/Makefile.am	2008-06-14 02:59:22.000000000 -0500
++++ src/libhdate-1.4.12/bindings/ruby/Makefile.am	2008-06-15 16:14:29.000000000 -0500
+@@ -3,22 +3,17 @@
+ 
+ if WITH_RUBY
+ 
+-DEPS= $(top_builddir)/src/libhdate.la
++BUILT_SOURCES = hdate_wrap.cxx
+ 
+-CLEANFILES = *.o *.cxx *.so *wrap*
++rubydir = $(RU_MODULES_PATH)
++ruby_LTLIBRARIES = hdate.la
+ 
+-all-am: hdate.so
+-	
+-
+-hdate.so: hdate_wrap.cxx
+-	g++ -fpic -fno-strict-aliasing -g -O2 -c hdate_wrap.cxx $(RU_CFLAGS) -I$(top_srcdir)/src
+-	gcc -shared ../../src/.libs/libhdate.so hdate_wrap.o -rdynamic -Wl,-export-dynamic -lruby$(RU_VERSION) -lpthread -ldl -lcrypt -lm -lc -lstdc++ -o hdate.so
++hdate_la_SOURCES = hdate_wrap.cxx
++hdate_la_CXXFLAGS = -I$(top_srcdir)/src $(RU_CFLAGS)
++hdate_la_LDFLAGS = -module -avoid-version -no-undefined -shrext .so
++hdate_la_LIBADD = $(top_builddir)/src/libhdate.la -lruby
+ 
+ hdate_wrap.cxx: hdate.i
+-	swig -c++ -ruby hdate.i
+-
+-install-data-local: hdate.so
+-	$(mkinstalldirs) $(DESTDIR)$(RU_MODULES_PATH)
+-	$(INSTALL_DATA) hdate.so $(DESTDIR)$(RU_MODULES_PATH)/hdate.so
++	swig -ruby -c++ -outdir . $<
+ 
+ endif
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4~' -x aclocal.m4t -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x '*config.h.in' -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x aclocal.m4 -x Makefile.in -x makefile.in -x configure -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x intl -x m4 -x 'hdate_wrap.c*' origsrc/libhdate-1.4.12/configure.in src/libhdate-1.4.12/configure.in
+--- origsrc/libhdate-1.4.12/configure.in	2008-06-15 02:51:27.000000000 -0500
++++ src/libhdate-1.4.12/configure.in	2008-06-15 16:23:02.375000000 -0500
+@@ -21,6 +21,7 @@
+ AC_GNU_SOURCE
+ AC_USE_SYSTEM_EXTENSIONS
+ AC_PROG_CC
++AC_PROG_CXX
+ AC_PROG_INSTALL
+ AC_PROG_LN_S
+ AC_PROG_MAKE_SET
+@@ -104,6 +105,7 @@
+ 	  if test -f $PY_PREFIX/include/python$PY_VERSION/Python.h; then
+ 		  AC_MSG_RESULT(yes)
+ 		  PY_CFLAGS="-I$PY_PREFIX/include/python$PY_VERSION"
++		  PY_LIBS="-L$PY_PREFIX/lib/python$PY_VERSION/config -lpython$PY_VERSION"
+ 		  
+ 		  if test "$with_python_sitelib_dir" = "" ; then
+ 		    PY_MODULES_PATH="$PY_PREFIX/lib/python$PY_VERSION/site-packages"
+@@ -113,6 +115,7 @@
+ 		  
+ 		  AC_SUBST([PY_VERSION])
+ 		  AC_SUBST([PY_CFLAGS])
++		  AC_SUBST([PY_LIBS])
+ 		  AC_SUBST([PY_MODULES_PATH])
+ 		  if test "$have_swig" = "no"; then
+ 			build_python=no
+@@ -185,12 +188,12 @@
+   [path to php site lib])])
+ 
+ if test "$have_php" = "yes"; then
+-	  AC_CHECK_PROG(have_php_config, "php-config5", yes, no)
++	  AC_CHECK_PROG(have_php_config, "php-config", yes, no)
+ 	  if test "$have_php_config" = "yes"; then
+ 	      
+ 	      PH_CONFIG_PATH=`php --ini | head -n1 | cut -d: -f2 | sed 's/\s//g'`
+ 		  if test "$with_php_sitelib_dir" = "" ; then
+-		    PH_MODULES_PATH=`php-config5 --extension-dir`
++		    PH_MODULES_PATH=`php-config --extension-dir`
+ 		  else
+ 		    PH_MODULES_PATH=$with_php_sitelib_dir
+ 		  fi
+@@ -230,6 +233,7 @@
+ 		  AC_MSG_RESULT(yes)
+ 		  PE_CFLAGS="-I$PE_PREFIX/CORE "
+ 		  PE_CFLAGS=$PE_CFLAGS`(perl -e 'use Config; print $Config{cppflags};')`
++		  PE_LIBS="-L$PE_PREFIX/CORE -lperl"
+ 		  
+ 		  if test "$with_perl_sitelib_dir" = "" ; then
+ 		    PE_MODULES_PATH=`(perl -e 'use Config; print $Config{sitelib};')`
+@@ -238,6 +242,7 @@
+ 		  fi
+ 		  		  
+ 		  AC_SUBST([PE_CFLAGS])
++		  AC_SUBST([PE_LIBS])
+ 		  AC_SUBST([PE_MODULES_PATH])
+ 		  if test "x$have_swig" = "xno"; then
+ 			build_perl=no
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4~' -x aclocal.m4t -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x '*config.h.in' -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x aclocal.m4 -x Makefile.in -x makefile.in -x configure -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x intl -x m4 -x 'hdate_wrap.c*' origsrc/libhdate-1.4.12/examples/bindings/Makefile.am src/libhdate-1.4.12/examples/bindings/Makefile.am
+--- origsrc/libhdate-1.4.12/examples/bindings/Makefile.am	2008-06-15 01:17:25.000000000 -0500
++++ src/libhdate-1.4.12/examples/bindings/Makefile.am	2008-06-15 16:14:29.078125000 -0500
+@@ -9,5 +9,5 @@
+   hdate_ruby.rb \
+   hdate_php.php
+ 
+-libhdatedocdir = ${prefix}/share/doc/libhdate/examples/bindings
++libhdatedocdir = ${prefix}/share/doc/libhdate-$(VERSION)/examples/bindings
+ libhdatedoc_DATA = $(EXTRA_DIST)
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4~' -x aclocal.m4t -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x '*config.h.in' -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x aclocal.m4 -x Makefile.in -x makefile.in -x configure -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x intl -x m4 -x 'hdate_wrap.c*' origsrc/libhdate-1.4.12/examples/bindings/pascal/Makefile.am src/libhdate-1.4.12/examples/bindings/pascal/Makefile.am
+--- origsrc/libhdate-1.4.12/examples/bindings/pascal/Makefile.am	2008-06-14 02:59:23.000000000 -0500
++++ src/libhdate-1.4.12/examples/bindings/pascal/Makefile.am	2008-06-15 16:14:29.109375000 -0500
+@@ -1,4 +1,4 @@
+ EXTRA_DIST = hdate_class.pp hdate_obj.pp hdate_pascal.pp
+ 
+-libhdatedocdir = ${prefix}/share/doc/libhdate/examples/bindings/pascal
++libhdatedocdir = ${prefix}/share/doc/libhdate-$(VERSION)/examples/bindings/pascal
+ libhdatedoc_DATA = hdate_class.pp hdate_obj.pp hdate_pascal.pp
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4~' -x aclocal.m4t -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x '*config.h.in' -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x aclocal.m4 -x Makefile.in -x makefile.in -x configure -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x intl -x m4 -x 'hdate_wrap.c*' origsrc/libhdate-1.4.12/examples/hcal/Makefile.am src/libhdate-1.4.12/examples/hcal/Makefile.am
+--- origsrc/libhdate-1.4.12/examples/hcal/Makefile.am	2008-06-14 02:59:23.000000000 -0500
++++ src/libhdate-1.4.12/examples/hcal/Makefile.am	2008-06-15 16:14:29.125000000 -0500
+@@ -19,5 +19,5 @@
+ 
+ endif
+ 
+-libhdatedocdir = ${prefix}/share/doc/libhdate/examples/hcal
++libhdatedocdir = ${prefix}/share/doc/libhdate-$(VERSION)/examples/hcal
+ libhdatedoc_DATA = hcal.c hdate.c
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4~' -x aclocal.m4t -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x '*config.h.in' -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x aclocal.m4 -x Makefile.in -x makefile.in -x configure -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x intl -x m4 -x 'hdate_wrap.c*' origsrc/libhdate-1.4.12/src/Makefile.am src/libhdate-1.4.12/src/Makefile.am
+--- origsrc/libhdate-1.4.12/src/Makefile.am	2008-06-14 02:59:22.000000000 -0500
++++ src/libhdate-1.4.12/src/Makefile.am	2008-06-15 16:14:29.187500000 -0500
+@@ -13,9 +13,9 @@
+ 	hdate.h\
+ 	support.h
+ 
+-libhdate_la_LDFLAGS = -version-info $(VERSION_INFO)
++libhdate_la_LDFLAGS = -version-info $(VERSION_INFO) -no-undefined
+ 
+-libhdate_la_LIBADD = 
++libhdate_la_LIBADD = $(LTLIBINTL)
+ 
+ include_HEADERS = hdate.h hdatepp.h
+ 

@@ -4,27 +4,30 @@ LibHdate is a small C,C++ library for Hebrew calendar and dates,
 holidays, and reading sequence (parasha).
 
 Runtime requirements:
-  cygwin-1.5.25-7
+  cygwin-1.5.25-11
   libintl8-0.15-1
+(gpc-hdate)
+  gcc-gpc-3.4.4-3
 (perl-hdate)
-  perl-5.8.8-4
+  perl-5.10.0-3
 (php-hdate)
-  php-5.2.5-1
+  php-5.2.6-1
 (python-hdate)
-  python-2.5.1-3
+  python-2.5.2-1
 (ruby-hdate)
-  ruby-1.8.6-1
+  ruby-1.8.6_p114-1
 
 Build requirements:
 (besides corresponding -devel packages)
-  cygwin-1.5.25-7
   autoconf2.5-2.61-1
-  automake1.9-1.9.6-2
-  binutils-20060817-1
-  cygport-0.3.7-1
+  automake1.10-1.10.1-1
+  binutils-20080523-1
+  cygport-0.3.11-1
   gawk-3.1.6-1
   gcc-core-3.4.4-3
-  libtool1.5-1.5.23a-2
+  gcc-g++-3.4.4-3
+  gcc-gpc-3.4.4-3
+  libtool-2.2.2-2
   make-3.81-1
   sed-4.1.5-2
 
@@ -37,21 +40,22 @@ Canonical download:
 -------------------------------------------
 
 Build instructions:
-  unpack libhdate-1.4.11-X-src.tar.bz2
+  unpack libhdate-1.4.12-X-src.tar.bz2
     if you use setup to install this src package, it will be
 	 unpacked under /usr/src automatically
   cd /usr/src
-  cygport ./libhdate-1.4.11-X.cygport all
+  cygport ./libhdate-1.4.12-X.cygport all
 
 This will create:
-  /usr/src/libhdate-1.4.11-X-src.tar.bz2
-  /usr/src/libhdate-1.4.11-X.tar.bz2
-  /usr/src/libhdate-devel-1.4.11-X.tar.bz2
-  /usr/src/libhdate1-1.4.11-X.tar.bz2
-  /usr/src/perl-hdate-1.4.11-X.tar.bz2
-  /usr/src/php-hdate-1.4.11-X.tar.bz2
-  /usr/src/python-hdate-1.4.11-X.tar.bz2
-  /usr/src/ruby-hdate-1.4.11-X.tar.bz2
+  /usr/src/libhdate-1.4.12-X-src.tar.bz2
+  /usr/src/libhdate-1.4.12-X.tar.bz2
+  /usr/src/libhdate-devel-1.4.12-X.tar.bz2
+  /usr/src/libhdate1-1.4.12-X.tar.bz2
+  /usr/src/gpc-hdate-1.4.12-X.tar.bz2
+  /usr/src/perl-hdate-1.4.12-X.tar.bz2
+  /usr/src/php-hdate-1.4.12-X.tar.bz2
+  /usr/src/python-hdate-1.4.12-X.tar.bz2
+  /usr/src/ruby-hdate-1.4.12-X.tar.bz2
 
 -------------------------------------------
 
@@ -60,21 +64,23 @@ Files included in the binary packages:
 (libhdate)
   /usr/bin/hcal.exe
   /usr/bin/hdate.exe
-  /usr/share/doc/libhdate-1.4.11/ABOUT-NLS
-  /usr/share/doc/libhdate-1.4.11/AUTHORS
-  /usr/share/doc/libhdate-1.4.11/COPYING
-  /usr/share/doc/libhdate-1.4.11/ChangeLog
-  /usr/share/doc/libhdate-1.4.11/INSTALL
-  /usr/share/doc/libhdate-1.4.11/NEWS
-  /usr/share/doc/libhdate-1.4.11/README
-  /usr/share/doc/libhdate-1.4.11/USE
-  /usr/share/doc/libhdate-1.4.11/examples/bindings/hdate_cpp.cpp
-  /usr/share/doc/libhdate-1.4.11/examples/bindings/hdate_perl.pl
-  /usr/share/doc/libhdate-1.4.11/examples/bindings/hdate_php.php
-  /usr/share/doc/libhdate-1.4.11/examples/bindings/hdate_python.py
-  /usr/share/doc/libhdate-1.4.11/examples/bindings/hdate_ruby.rb
-  /usr/share/doc/libhdate-1.4.11/examples/hcal/hcal.c
-  /usr/share/doc/libhdate-1.4.11/examples/hcal/hdate.c
+  /usr/share/doc/libhdate-1.4.12/ABOUT-NLS
+  /usr/share/doc/libhdate-1.4.12/AUTHORS
+  /usr/share/doc/libhdate-1.4.12/COPYING
+  /usr/share/doc/libhdate-1.4.12/ChangeLog
+  /usr/share/doc/libhdate-1.4.12/INSTALL
+  /usr/share/doc/libhdate-1.4.12/NEWS
+  /usr/share/doc/libhdate-1.4.12/README
+  /usr/share/doc/libhdate-1.4.12/USE
+  /usr/share/doc/libhdate-1.4.12/examples/bindings/hdate_c.c
+  /usr/share/doc/libhdate-1.4.12/examples/bindings/hdate_cpp.cpp
+  /usr/share/doc/libhdate-1.4.12/examples/bindings/hdate_pas.pas
+  /usr/share/doc/libhdate-1.4.12/examples/bindings/hdate_perl.pl
+  /usr/share/doc/libhdate-1.4.12/examples/bindings/hdate_php.php
+  /usr/share/doc/libhdate-1.4.12/examples/bindings/hdate_python.py
+  /usr/share/doc/libhdate-1.4.12/examples/bindings/hdate_ruby.rb
+  /usr/share/doc/libhdate-1.4.12/examples/hcal/hcal.c
+  /usr/share/doc/libhdate-1.4.12/examples/hcal/hdate.c
   /usr/share/locale/es_MX/LC_MESSAGES/libhdate.mo
   /usr/share/locale/fr/LC_MESSAGES/libhdate.mo
   /usr/share/locale/he/LC_MESSAGES/libhdate.mo
@@ -99,10 +105,14 @@ Files included in the binary packages:
   /usr/share/man/man3/hdate_struct.3.gz
   /usr/share/man/man3/hdatepp.h.3.gz
 
+(gpc-hdate)
+  /usr/lib/gcc/i686-pc-cygwin/3.4.4/units/hdate.gpi
+  /usr/lib/gcc/i686-pc-cygwin/3.4.4/units/hdate.pas
+
 (perl-hdate)
-  /usr/lib/perl5/vendor_perl/5.8/cygwin/hdate.dll
-  /usr/lib/perl5/vendor_perl/5.8/cygwin/hdate.la
-  /usr/lib/perl5/vendor_perl/5.8/cygwin/hdate.pm
+  /usr/lib/perl5/vendor_perl/5.10/i686-cygwin/hdate.dll
+  /usr/lib/perl5/vendor_perl/5.10/i686-cygwin/hdate.la
+  /usr/lib/perl5/vendor_perl/5.10/i686-cygwin/hdate.pm
 
 (php-hdate)
   /etc/php5/conf.d/libhdate.ini
@@ -123,6 +133,9 @@ Files included in the binary packages:
 ------------------
 
 Port Notes:
+
+----- version 1.4.12-1 -----
+Version bump, added GPC Pascal bindings.
 
 ----- version 1.4.11-1 -----
 Version bump, added PHP and Ruby bindings.
