@@ -1,5 +1,5 @@
 category: Libs Religion
-requires: cygwin libintl8
+requires: libintl8
 external-source: libhdate
 sdesc: "Hebrew calendar library (runtime)"
 ldesc: "LibHdate is a small C,C++ library for Hebrew calendar and 

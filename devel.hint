@@ -1,5 +1,5 @@
 category: Libs Religion
-requires: cygwin libhdate1 gettext
+requires: libhdate1 gettext
 external-source: libhdate
 sdesc: "Hebrew calendar library (development)"
 ldesc: "LibHdate is a small C,C++ library for Hebrew calendar and 

@@ -1,5 +1,5 @@
 category: Perl Religion
-requires: cygwin libhdate1 perl
+requires: libhdate1 perl
 external-source: libhdate
 sdesc: "Hebrew calendar library (Perl bindings)"
 ldesc: "LibHdate is a small C,C++ library for Hebrew calendar and 

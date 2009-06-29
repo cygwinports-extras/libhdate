@@ -1,5 +1,5 @@
 category: PHP Religion
-requires: cygwin libhdate1 php
+requires: libhdate1 php
 external-source: libhdate
 sdesc: "Hebrew calendar library (PHP bindings)"
 ldesc: "LibHdate is a small C,C++ library for Hebrew calendar and 

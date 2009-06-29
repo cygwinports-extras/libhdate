@@ -1,5 +1,5 @@
 category: Ruby Religion
-requires: cygwin libhdate1 ruby
+requires: libhdate1 ruby
 external-source: libhdate
 sdesc: "Hebrew calendar library (Ruby bindings)"
 ldesc: "LibHdate is a small C,C++ library for Hebrew calendar and 
