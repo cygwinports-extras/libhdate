@@ -1,0 +1,33 @@
+--- origsrc/libhdate-1.4.12/bindings/ruby/Makefile.am	2008-06-14 02:59:22.000000000 -0500
++++ src/libhdate-1.4.12/bindings/ruby/Makefile.am	2008-06-15 16:14:29.000000000 -0500
+@@ -3,22 +3,17 @@
+ 
+ if WITH_RUBY
+ 
+-DEPS= $(top_builddir)/src/libhdate.la
++BUILT_SOURCES = hdate_wrap.cxx
+ 
+-CLEANFILES = *.o *.cxx *.so *wrap*
++rubydir = $(RU_MODULES_PATH)
++ruby_LTLIBRARIES = hdate.la
+ 
+-all-am: hdate.so
+-	
+-
+-hdate.so: hdate_wrap.cxx
+-	g++ -fpic -fno-strict-aliasing -g -O2 -c hdate_wrap.cxx $(RU_CFLAGS) -I$(top_srcdir)/src
+-	gcc -shared ../../src/.libs/libhdate.so hdate_wrap.o -rdynamic -Wl,-export-dynamic -lruby$(RU_VERSION) -lpthread -ldl -lcrypt -lm -lc -lstdc++ -o hdate.so
++hdate_la_SOURCES = hdate_wrap.cxx
++hdate_la_CXXFLAGS = -I$(top_srcdir)/src $(RU_CFLAGS)
++hdate_la_LDFLAGS = -module -avoid-version -no-undefined -shrext .so
++hdate_la_LIBADD = $(top_builddir)/src/libhdate.la -lruby
+ 
+ hdate_wrap.cxx: hdate.i
+-	swig -c++ -ruby hdate.i
+-
+-install-data-local: hdate.so
+-	$(mkinstalldirs) $(DESTDIR)$(RU_MODULES_PATH)
+-	$(INSTALL_DATA) hdate.so $(DESTDIR)$(RU_MODULES_PATH)/hdate.so
++	swig -ruby -c++ -outdir . $<
+ 
+ endif

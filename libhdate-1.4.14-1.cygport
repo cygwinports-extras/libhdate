@@ -1,0 +1,49 @@
+inherit perl php python ruby autotools
+
+DESCRIPTION="Hebrew date library and utilities"
+HOMEPAGE="http://libhdate.sourceforge.net/"
+SRC_URI="mirror://sourceforge/${PN}/${P}.tar.bz2"
+
+PATCH_URI="
+	1.4.12-libtool22.patch
+	1.4.12-no-undefined.patch
+	1.4.12-pascal.patch
+	1.4.12-perl.patch
+	1.4.12-php.patch
+	1.4.12-python.patch
+	1.4.12-ruby.patch
+"
+
+PKG_NAMES="${PN} ${PN}1 ${PN}-devel perl-hdate php-hdate python-hdate ruby-hdate" # gpc-hdate
+PKG_HINTS="setup runtime devel perl php python ruby" # gpc
+libhdate_CONTENTS="--exclude=examples usr/bin/*.exe usr/share/doc/ usr/share/locale/ usr/share/man/man1/"
+libhdate1_CONTENTS="usr/bin/*-1.dll"
+libhdate_devel_CONTENTS='usr/include/ usr/lib/lib* usr/lib/pkgconfig/ usr/share/man/man3/'
+#gpc_hdate_CONTENTS="usr/lib/gcc/"
+perl_hdate_CONTENTS="${PERL_VENDORARCH#/}"
+php_hdate_CONTENTS="${PHP_INI_DIR#/} ${PHP_EXTENSION_DIR#/}"
+python_hdate_CONTENTS="${PYTHON_SITELIB#/}"
+ruby_hdate_CONTENTS="${RUBY_SITELIB#/}"
+PKG_IGNORE="usr/share/doc/libhdate/examples/"
+
+DIFF_EXCLUDES='intl m4 hdate_wrap.c*'
+
+NO_AUTOPOINT=1
+
+CYGCONF_ARGS="
+	--with-perl-sitelib-dir=${PERL_VENDORARCH}
+	--with-php-sitelib-dir=${PHP_EXTENSION_DIR}
+	--with-python-sitelib-dir=${PYTHON_SITELIB}
+	--with-ruby-sitelib-dir=${RUBY_SITEARCH}
+"
+
+src_install() {
+	cd ${B}
+	cyginstall phpconfig_DATA=
+
+	php_postinst
+	python_optimize
+
+	dodoc ${S}/hdate_README ${S}/USE
+#	rm -f ${D}/usr/share/doc/${P}/examples/bindings/pascal/*
+}
