@@ -1,0 +1,50 @@
+--- origsrc/libhdate-1.4.20/bindings/perl/Makefile.am	2010-02-03 15:07:03.000000000 -0600
++++ src/libhdate-1.4.20/bindings/perl/Makefile.am	2011-08-30 14:34:26.951957200 -0500
+@@ -5,21 +5,21 @@ if WITH_PERL
+ 
+ DEPS= $(top_builddir)/src/libhdate.la
+ 
+-CLEANFILES = *.o *.cxx *.so *wrap* *.pm
++CLEANFILES = *.o *.cxx *.dll *wrap* *.pm
+ 
+-all-am: hdate.so
++all-am: hdate.dll
+ 	
+ 
+-hdate.so: hdate_wrap.cxx
++hdate.dll: hdate_wrap.cxx
+-	g++ -fpic -c hdate_wrap.cxx $(PE_CFLAGS) -I$(top_srcdir)/src
+-	g++ -shared ../../src/.libs/libhdate.so hdate_wrap.o -o hdate.so
++	g++ $(CXXFLAGS) -c hdate_wrap.cxx $(PE_CFLAGS) -I$(srcdir) -I$(top_srcdir)/src
++	g++ -shared hdate_wrap.o -o hdate.dll $(PE_CFLAGS) $(PE_LIBS) ../../src/.libs/libhdate.dll.a
+ 
+ hdate_wrap.cxx: hdate.i
+-	swig -perl -c++ hdate.i
++	swig -perl -c++ -outcurrentdir $<
+ 
+-install-data-local: hdate.so
++install-data-local: hdate.dll
+ 	$(mkinstalldirs) $(DESTDIR)$(PE_MODULES_PATH)/auto/hdate/
+-	$(INSTALL_DATA) hdate.so $(DESTDIR)$(PE_MODULES_PATH)/auto/hdate/hdate.so
++	$(INSTALL) hdate.dll $(DESTDIR)$(PE_MODULES_PATH)/auto/hdate/hdate.dll
+ 	$(INSTALL_DATA) hdate.pm $(DESTDIR)$(PE_MODULES_PATH)/hdate.pm
+ 
+ endif
+--- origsrc/libhdate-1.4.20/configure.in	2011-08-30 14:25:35.339550700 -0500
++++ src/libhdate-1.4.20/configure.in	2011-08-30 14:28:17.143805400 -0500
+@@ -233,6 +233,7 @@ if test "$have_perl" = "yes"; then
+ 		  AC_MSG_RESULT(yes)
+ 		  PE_CFLAGS="-I$PE_PREFIX/CORE "
+ 		  PE_CFLAGS=$PE_CFLAGS`(perl -e 'use Config; print $Config{cppflags};')`
++		  PE_LIBS="-L$PE_PREFIX/CORE -lperl"
+ 		  
+ 		  if test "$with_perl_sitelib_dir" = "" ; then
+ 		    PE_MODULES_PATH=`(perl -e 'use Config; print $Config{sitelib};')`
+@@ -241,6 +242,7 @@ if test "$have_perl" = "yes"; then
+ 		  fi
+ 		  		  
+ 		  AC_SUBST([PE_CFLAGS])
++		  AC_SUBST([PE_LIBS])
+ 		  AC_SUBST([PE_MODULES_PATH])
+ 		  if test "x$have_swig" = "xno"; then
+ 			build_perl=no

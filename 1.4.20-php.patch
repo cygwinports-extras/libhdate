@@ -1,0 +1,42 @@
+--- origsrc/libhdate-1.4.20/bindings/php/Makefile.am	2010-11-05 00:21:31.000000000 -0500
++++ src/libhdate-1.4.20/bindings/php/Makefile.am	2011-08-30 14:34:33.889354000 -0500
+@@ -5,24 +5,24 @@ if WITH_PHP
+ 
+ DEPS= $(top_builddir)/src/libhdate.la
+ 
+-CLEANFILES = *.o *.cpp *.h *.so *.php *wrap*
++CLEANFILES = *.o *.cpp *.h *.dll *.php *wrap*
+ 
+-all-am: hdate.so
++all-am: hdate.dll
+ 	
+ 
+-hdate.so: hdate_wrap.cpp
++hdate.dll: hdate_wrap.cpp
+-	g++ -I$(top_srcdir)/src `php-config --includes` -fpic -c hdate_wrap.cpp
+-	gcc -shared ../../src/.libs/libhdate.so hdate_wrap.o -lstdc++ -o hdate.so
++	g++ $(CXXFLAGS) -I$(srcdir) -I$(top_srcdir)/src `php-config --includes` -fpic -c hdate_wrap.cpp
++	g++ -shared hdate_wrap.o -o hdate.dll `php-config --libs` ../../src/.libs/libhdate.dll.a
+ 
+ hdate_wrap.cpp: hdate.i
+-	swig -php5 -c++ hdate.i
++	swig -php5 -c++ -outcurrentdir $<
+ 
+-install-data-local: hdate.so hdate.ini hdate.php
++install-data-local: hdate.dll hdate.ini hdate.php
+ 	$(mkinstalldirs) $(DESTDIR)$(PH_MODULES_PATH)
+-	$(INSTALL_DATA) hdate.so $(DESTDIR)$(PH_MODULES_PATH)/hdate.so
++	$(INSTALL) hdate.dll $(DESTDIR)$(PH_MODULES_PATH)/hdate.dll
+ 	
+ 	$(mkinstalldirs) $(DESTDIR)$(PH_CONFIG_PATH)
+-	$(INSTALL_DATA) hdate.ini $(DESTDIR)$(PH_CONFIG_PATH)/hdate.ini
++	$(INSTALL_DATA) $(srcdir)/hdate.ini $(DESTDIR)$(PH_CONFIG_PATH)/hdate.ini
+ 	
+ 	$(mkinstalldirs) $(DESTDIR)$(PH_INCLUDE_PATH)
+ 	$(INSTALL_DATA) hdate.php $(DESTDIR)$(PH_INCLUDE_PATH)/hdate.php
+--- origsrc/libhdate-1.4.20/bindings/php/hdate.ini	2010-11-04 23:49:28.000000000 -0500
++++ src/libhdate-1.4.20/bindings/php/hdate.ini	2011-08-30 14:37:59.782130400 -0500
+@@ -1,2 +1,2 @@
+ ; configuration for php hdate module
+-extension=hdate.so
++extension=hdate.dll

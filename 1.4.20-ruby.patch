@@ -1,0 +1,21 @@
+--- origsrc/libhdate-1.4.20/bindings/ruby/Makefile.am	2010-02-03 15:07:03.000000000 -0600
++++ src/libhdate-1.4.20/bindings/ruby/Makefile.am	2011-08-30 14:33:28.661623200 -0500
+@@ -11,14 +11,14 @@ if WITH_RUBY
+ 
+ 
+ hdate.so: hdate_wrap.cxx
+-	g++ -fpic -fno-strict-aliasing -g -O2 -c hdate_wrap.cxx $(RU_CFLAGS) -I$(top_srcdir)/src
+-	gcc -shared ../../src/.libs/libhdate.so hdate_wrap.o -rdynamic -Wl,-export-dynamic -lruby$(RU_VERSION) -lpthread -ldl -lcrypt -lm -lc -lstdc++ -o hdate.so
++	g++ $(CXXFLAGS) -c hdate_wrap.cxx $(RU_CFLAGS) -I$(srcdir) -I$(top_srcdir)/src
++	g++ -shared hdate_wrap.o -o hdate.so -lruby ../../src/.libs/libhdate.dll.a
+ 
+ hdate_wrap.cxx: hdate.i
+-	swig -c++ -ruby hdate.i
++	swig -c++ -ruby -outcurrentdir $<
+ 
+ install-data-local: hdate.so
+ 	$(mkinstalldirs) $(DESTDIR)$(RU_MODULES_PATH)
+-	$(INSTALL_DATA) hdate.so $(DESTDIR)$(RU_MODULES_PATH)/hdate.so
++	$(INSTALL) hdate.so $(DESTDIR)$(RU_MODULES_PATH)/hdate.so
+ 
+ endif

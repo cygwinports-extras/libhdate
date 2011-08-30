@@ -1,0 +1,50 @@
+--- origsrc/libhdate-1.4.20/bindings/python/Makefile.am	2010-02-03 15:07:03.000000000 -0600
++++ src/libhdate-1.4.20/bindings/python/Makefile.am	2011-08-30 14:34:41.624796400 -0500
+@@ -5,21 +5,21 @@ if WITH_PYTHON
+ 
+ DEPS= $(top_builddir)/src/libhdate.la
+ 
+-CLEANFILES = *.o *.cxx *.so *wrap* *.py
++CLEANFILES = *.o *.cxx *.dll *wrap* *.py
+ 
+-all-am: _hdate.so
++all-am: _hdate.dll
+ 	
+ 
+-_hdate.so: hdate_wrap.cxx
++_hdate.dll: hdate_wrap.cxx
+-	g++ -fpic -c hdate_wrap.cxx $(PY_CFLAGS) -I$(top_srcdir)/src
+-	g++ -shared ../../src/.libs/libhdate.so hdate_wrap.o -o _hdate.so
++	g++ $(CXXFLAGS) -c hdate_wrap.cxx $(PY_CFLAGS) -I$(srcdir) -I$(top_srcdir)/src
++	g++ -shared hdate_wrap.o -o _hdate.dll $(PY_LIBS) ../../src/.libs/libhdate.dll.a
+ 
+ hdate_wrap.cxx: hdate.i
+-	swig -python -c++ hdate.i
++	swig -python -c++ -outcurrentdir $<
+ 
+-install-data-local: _hdate.so
++install-data-local: _hdate.dll
+ 	$(mkinstalldirs) $(DESTDIR)$(PY_MODULES_PATH)
+-	$(INSTALL_DATA) _hdate.so $(DESTDIR)$(PY_MODULES_PATH)/_hdate.so
++	$(INSTALL) _hdate.dll $(DESTDIR)$(PY_MODULES_PATH)/_hdate.dll
+ 	$(INSTALL_DATA) hdate.py $(DESTDIR)$(PY_MODULES_PATH)/hdate.py
+ 
+ endif
+--- origsrc/libhdate-1.4.20/configure.in	2011-08-30 14:25:35.339550700 -0500
++++ src/libhdate-1.4.20/configure.in	2011-08-30 14:28:17.143805400 -0500
+@@ -105,6 +105,7 @@ if test "$have_python" = "yes"; then
+ 	  if test -f $PY_PREFIX/include/python$PY_VERSION/Python.h; then
+ 		  AC_MSG_RESULT(yes)
+ 		  PY_CFLAGS="-I$PY_PREFIX/include/python$PY_VERSION"
++		  PY_LIBS="-L$PY_PREFIX/lib/python$PY_VERSION/config -lpython$PY_VERSION"
+ 		  
+ 		  if test "$with_python_sitelib_dir" = "" ; then
+ 		    PY_MODULES_PATH="$PY_PREFIX/lib/python$PY_VERSION/dist-packages"
+@@ -114,6 +115,7 @@ if test "$have_python" = "yes"; then
+ 		  
+ 		  AC_SUBST([PY_VERSION])
+ 		  AC_SUBST([PY_CFLAGS])
++		  AC_SUBST([PY_LIBS])
+ 		  AC_SUBST([PY_MODULES_PATH])
+ 		  if test "$have_swig" = "no"; then
+ 			build_python=no
