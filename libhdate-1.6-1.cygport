@@ -12,6 +12,7 @@ PATCH_URI="
 	1.4.20-php.patch
 	1.4.20-python.patch
 	1.4.20-ruby.patch
+	1.6-cflags.patch
 "
 
 PKG_NAMES="${PN} ${PN}1 ${PN}-devel perl-hdate php-hdate python-hdate ruby-hdate" # gpc-hdate
@@ -47,3 +48,5 @@ src_install() {
 }
 
 DOCS="hdate_README USE"
+
+KEEP_LA_FILES="none"
