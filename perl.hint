@@ -1,6 +1,0 @@
-category: Perl Religion
-requires: libgcc1 libhdate1 libstdc++6 libssp0 perl
-external-source: libhdate
-sdesc: "Hebrew calendar library (Perl bindings)"
-ldesc: "LibHdate is a small C,C++ library for Hebrew calendar and 
-dates, holidays, and reading sequence (parasha)."

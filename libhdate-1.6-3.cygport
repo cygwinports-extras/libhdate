@@ -1,6 +1,9 @@
 inherit perl php python ruby autotools
 
-DESCRIPTION="Hebrew date library and utilities"
+CATEGORY="Libs"
+SUMMARY="Hebrew calendar library"
+DESCRIPTION="LibHdate is a small C/C++ library for Hebrew calendar and
+dates, holidays, and reading sequence (parasha)."
 HOMEPAGE="http://libhdate.sourceforge.net/"
 SRC_URI="mirror://sourceforge/${PN}/${P}.tar.bz2"
 
@@ -16,18 +19,27 @@ PATCH_URI="
 "
 
 PKG_NAMES="${PN} ${PN}1 ${PN}-devel perl-hdate php-hdate python-hdate ruby-hdate" # gpc-hdate
-PKG_HINTS="setup runtime devel perl php python ruby" # gpc
+libhdate_CATEGORY="Utils"
+libhdate_SUMMARY="Hebrew calendar utilities"
 libhdate_CONTENTS="--exclude=examples usr/bin/*.exe usr/share/doc/ usr/share/locale/ usr/share/man/man1/"
+libhdate1_SUMMARY="${SUMMARY} (runtime)"
 libhdate1_CONTENTS="usr/bin/*-1.dll"
+libhdate_devel_SUMMARY="${SUMMARY} (development)"
 libhdate_devel_CONTENTS='usr/include/ usr/lib/lib* usr/lib/pkgconfig/ usr/share/man/man3/'
 #gpc_hdate_CONTENTS="usr/lib/gcc/"
+perl_hdate_CATEGORY="Perl"
+perl_hdate_SUMMARY="${SUMMARY} (Perl bindings)"
 perl_hdate_CONTENTS="${PERL_VENDORARCH#/}"
+php_hdate_CATEGORY="PHP"
+php_hdate_SUMMARY="${SUMMARY} (PHP bindings)"
 php_hdate_CONTENTS="${PHP_INI_DIR#/} ${PHP_EXTENSION_DIR#/} ${PHP_PEAR_DIR#/}"
+python_hdate_CATEGORY="Python"
+python_hdate_SUMMARY="${SUMMARY} (Python bindings)"
 python_hdate_CONTENTS="${PYTHON_SITELIB#/}"
+ruby_hdate_CATEGORY="Ruby"
+ruby_hdate_SUMMARY="${SUMMARY} (Ruby bindings)"
 ruby_hdate_CONTENTS="${RUBY_VENDORLIB#/}"
 PKG_IGNORE="usr/share/doc/libhdate/examples/"
-
-DIFF_EXCLUDES='intl m4'
 
 NO_AUTOPOINT=1
 

@@ -1,6 +1,0 @@
-category: Perl Religion
-requires: libhdate1 libhdate-devel gcc-gpc
-external-source: libhdate
-sdesc: "Hebrew calendar library (GPC Pascal bindings)"
-ldesc: "LibHdate is a small C,C++ library for Hebrew calendar and 
-dates, holidays, and reading sequence (parasha)."

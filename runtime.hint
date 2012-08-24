@@ -1,6 +1,0 @@
-category: Libs Religion
-requires: libintl8
-external-source: libhdate
-sdesc: "Hebrew calendar library (runtime)"
-ldesc: "LibHdate is a small C,C++ library for Hebrew calendar and 
-dates, holidays, and reading sequence (parasha)."

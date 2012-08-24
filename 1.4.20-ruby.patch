@@ -1,3 +1,27 @@
+--- origsrc/libhdate-1.6/configure.in	2012-08-23 22:27:28.835139900 -0500
++++ src/libhdate-1.6/configure.in	2012-08-23 23:14:52.699799600 -0500
+@@ -146,10 +146,12 @@ if test "$have_ruby" = "yes"; then
+ 	  RU_PREFIX=`ruby -e 'require "mkmf"; puts $topdir'`
+ 	  RU_VERSION=`ruby -e "require 'mkmf'; puts config_string('MAJOR')"`
+ 	  RU_VERSION+=.`ruby -e "require 'mkmf'; puts config_string('MINOR')"`
++	  RU_ARCH=`ruby -e "puts RbConfig::CONFIG[['arch']]"`
+ 	  AC_MSG_CHECKING(for $RU_PREFIX/ruby.h)
+ 	  if test -f $RU_PREFIX/ruby.h; then
+ 		  AC_MSG_RESULT(yes)
+-		  RU_CFLAGS="-I$RU_PREFIX"
++		  RU_CFLAGS="-I$RU_PREFIX -I$RU_PREFIX/$RU_ARCH"
++		  RU_LIBS=`ruby -e "puts RbConfig::CONFIG[['LIBRUBYARG']]"`
+ 		  
+ 		  if test "$with_ruby_sitelib_dir" = "" ; then
+ 		    RU_MODULES_PATH="$RU_PREFIX"
+@@ -159,6 +161,7 @@ if test "$have_ruby" = "yes"; then
+ 		  
+ 		  AC_SUBST([RU_VERSION])
+ 		  AC_SUBST([RU_CFLAGS])
++		  AC_SUBST([RU_LIBS])
+ 		  AC_SUBST([RU_MODULES_PATH])
+ 		  if test "$have_swig" = "no"; then
+ 			build_ruby=no
 --- origsrc/libhdate-1.4.20/bindings/ruby/Makefile.am	2010-02-03 15:07:03.000000000 -0600
 +++ src/libhdate-1.4.20/bindings/ruby/Makefile.am	2011-08-30 14:33:28.661623200 -0500
 @@ -11,14 +11,14 @@ if WITH_RUBY
@@ -7,7 +31,7 @@
 -	g++ -fpic -fno-strict-aliasing -g -O2 -c hdate_wrap.cxx $(RU_CFLAGS) -I$(top_srcdir)/src
 -	gcc -shared ../../src/.libs/libhdate.so hdate_wrap.o -rdynamic -Wl,-export-dynamic -lruby$(RU_VERSION) -lpthread -ldl -lcrypt -lm -lc -lstdc++ -o hdate.so
 +	g++ $(CXXFLAGS) -c hdate_wrap.cxx $(RU_CFLAGS) -I$(srcdir) -I$(top_srcdir)/src
-+	g++ -shared hdate_wrap.o -o hdate.so -lruby ../../src/.libs/libhdate.dll.a
++	g++ -shared hdate_wrap.o -o hdate.so $(RU_LIBS) ../../src/.libs/libhdate.dll.a
  
  hdate_wrap.cxx: hdate.i
 -	swig -c++ -ruby hdate.i

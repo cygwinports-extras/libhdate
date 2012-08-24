@@ -1,6 +1,0 @@
-category: Ruby Religion
-requires: libgcc1 libhdate1 libstdc++6 ruby
-external-source: libhdate
-sdesc: "Hebrew calendar library (Ruby bindings)"
-ldesc: "LibHdate is a small C,C++ library for Hebrew calendar and 
-dates, holidays, and reading sequence (parasha)."
