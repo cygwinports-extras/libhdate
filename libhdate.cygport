@@ -2,13 +2,13 @@ inherit perl php python ruby autotools
 
 NAME="libhdate"
 VERSION=1.6
-RELEASE=4
+RELEASE=5
 CATEGORY="Libs"
 SUMMARY="Hebrew calendar library"
 DESCRIPTION="LibHdate is a small C/C++ library for Hebrew calendar and
 dates, holidays, and reading sequence (parasha)."
 HOMEPAGE="http://libhdate.sourceforge.net/"
-SRC_URI="mirror://sourceforge/${PN}/${P}.tar.bz2"
+SRC_URI="mirror://sourceforge/libhdate/${NAME}-${VERSION}.tar.bz2"
 
 PATCH_URI="
 	1.4.12-libtool22.patch
@@ -21,7 +21,7 @@ PATCH_URI="
 	1.6-cflags.patch
 "
 
-PKG_NAMES="${PN} ${PN}1 ${PN}-devel perl-hdate php-hdate python-hdate ruby-hdate" # gpc-hdate
+PKG_NAMES="${NAME} ${NAME}1 ${NAME}-devel perl-hdate php-hdate python-hdate ruby-hdate" # gpc-hdate
 libhdate_CATEGORY="Utils"
 libhdate_SUMMARY="Hebrew calendar utilities"
 libhdate_CONTENTS="usr/bin/*.exe usr/share/doc/ usr/share/locale/ usr/share/man/man1/"
@@ -57,7 +57,7 @@ src_install() {
 	cd ${B}
 	cyginstall PH_INCLUDE_PATH=${PHP_PEAR_DIR}
 
-	php_postinst
+	# do NOT run php_postinst, .ini is already installed
 	python_optimize
 }
 
