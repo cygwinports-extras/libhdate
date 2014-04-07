@@ -4,8 +4,8 @@
  	hdate.h\
  	support.h
  
--libhdate_la_LDFLAGS = -version-info $(VERSION_INFO)
-+libhdate_la_LDFLAGS = -version-info $(VERSION_INFO) -no-undefined
+-libhdate_la_LDFLAGS = $(libhdate_LDFLAGS) -version-info $(VERSION_INFO)
++libhdate_la_LDFLAGS = $(libhdate_LDFLAGS) -version-info $(VERSION_INFO) -no-undefined
  
 -libhdate_la_LIBADD = 
 +libhdate_la_LIBADD = $(LTLIBINTL)

@@ -1,0 +1,10 @@
+--- origsrc/libhdate-1.6.02/configure.in	2014-04-07 03:44:28.325650400 -0500
++++ src/libhdate-1.6.02/configure.in	2014-04-07 03:44:50.571475200 -0500
+@@ -34,7 +34,6 @@ AC_C_CONST
+ AC_CONFIG_MACRO_DIR([m4])
+ AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
+ 
+-CFLAGS=" -Wall -g -Wformat -Wformat-security -Werror=format-security -D_FORTIFY_SOURCE=2 -O1 -fstack-protector --param ssp-buffer-size=4 -fPIE -pie"
+ LIBS=-lm
+ 
+ dnl =======================================================================================

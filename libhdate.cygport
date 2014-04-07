@@ -1,8 +1,8 @@
 inherit perl php python ruby autotools
 
 NAME="libhdate"
-VERSION=1.6
-RELEASE=5
+VERSION=1.6.02
+RELEASE=1
 CATEGORY="Libs"
 SUMMARY="Hebrew calendar library"
 DESCRIPTION="LibHdate is a small C/C++ library for Hebrew calendar and
@@ -18,7 +18,7 @@ PATCH_URI="
 	1.4.20-php.patch
 	1.4.20-python.patch
 	1.4.20-ruby.patch
-	1.6-cflags.patch
+	1.6.02-cflags.patch
 "
 
 PKG_NAMES="${NAME} ${NAME}1 ${NAME}-devel perl-hdate php-hdate python-hdate ruby-hdate" # gpc-hdate
