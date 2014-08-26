@@ -2,7 +2,7 @@ inherit perl php python ruby autotools
 
 NAME="libhdate"
 VERSION=1.6.02
-RELEASE=1
+RELEASE=2
 CATEGORY="Libs"
 SUMMARY="Hebrew calendar library"
 DESCRIPTION="LibHdate is a small C/C++ library for Hebrew calendar and
@@ -41,7 +41,7 @@ python_hdate_SUMMARY="${SUMMARY} (Python bindings)"
 python_hdate_CONTENTS="${PYTHON_SITELIB#/}"
 ruby_hdate_CATEGORY="Ruby"
 ruby_hdate_SUMMARY="${SUMMARY} (Ruby bindings)"
-ruby_hdate_CONTENTS="${RUBY_VENDORLIB#/}"
+ruby_hdate_CONTENTS="${RUBY_VENDORARCH#/}"
 
 NO_AUTOPOINT=1
 
